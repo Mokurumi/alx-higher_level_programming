@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 from sys import argv, exit
 from calculator_1 import *
 
@@ -13,13 +12,13 @@ if __name__ == "__main__":
     result = 0
     a, b = int(argv[1]), int(argv[3])
 
-    if operator  == "+":
+    if operator == "+":
         result = add(a, b)
-    elif operator  == "-":
+    elif operator == "-":
         result = sub(a, b)
-    elif operator  == "*":
+    elif operator == "*":
         result = mul(a, b)
-    elif operator  == "/":
+    elif operator == "/":
         result = div(a, b)
     else:
         print('Unknown operator. Available operators: +, -, * and /')
