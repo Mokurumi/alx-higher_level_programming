@@ -36,6 +36,9 @@ int is_palindrome(listint_t **head)
 	listint_t *original = *head;
 	listint_t *reversed = reverse_listint(head);
 
+	if (reversed == *head)
+		return (1);
+
 	/* Compare the original list with its reversed version */
 	while (original != NULL && reversed != NULL)
 	{
