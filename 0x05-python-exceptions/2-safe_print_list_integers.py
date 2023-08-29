@@ -8,10 +8,12 @@ def safe_print_list_integers(my_list=[], x=0):
             if isinstance(item, int):
                 if int_count < x:
                     print("{:d}".format(item), end=' ')
-                    int_count++
+                    int_count += 1
                 else:
                     break
-            count++
+            count += 1
+            if count >= x:
+                break
         
         print()
         return (int_count)
