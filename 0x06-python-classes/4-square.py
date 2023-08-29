@@ -7,13 +7,13 @@ class Square:
     Represents a square.
 
     Attributes:
-        __size (int): The size of the square's sides.
+        __size: The size of the square's sides.
 
     Methods:
-        __init__(self, size=0): Initializes a new Square instance.
-        size(self): Getter for the size attribute.
-        size(self, value): Setter for the size attribute.
-        area(self): Calculates the area of the square.
+        __init__: Initializes a new Square instance.
+        size: Getter for the size attribute.
+        size: Setter for the size attribute.
+        area: Calculates the area of the square.
 
     Raises:
         TypeError: If size is not an integer.
@@ -24,7 +24,7 @@ class Square:
         Initializes a new Square instance.
 
         Args:
-            size (int): The size of the square's sides. Default is 0.
+            size: The size of the square's sides. Default is 0.
         """
         self.size = size
         
@@ -44,7 +44,7 @@ class Square:
         Setter for the size attribute.
 
         Args:
-            value (int): The new size value for the square's sides.
+            value: The new size value for the square's sides.
 
         Raises:
             TypeError: If value is not an integer.

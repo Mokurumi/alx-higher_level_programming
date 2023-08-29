@@ -7,12 +7,12 @@ class Square:
     Represents a square.
 
     Attributes:
-        size (int): The size of the square.
+        size: The size of the square.
 
     Methods:
-        __init__(self, size=0): Initializes a square with the given size.
-        area(self): Calculates and returns the area of the square.
-        my_print(self): Prints the square using '#' characters.
+        __init__: Initializes a square with the given size.
+        area: Calculates and returns the area of the square.
+        my_print: Prints the square using '#' characters.
     """
 
     def __init__(self, size=0):
@@ -20,7 +20,7 @@ class Square:
         Initializes a new Square instance.
 
         Args:
-            size (int, optional): The size of the square. Defaults to 0.
+            size: The size of the square. Defaults to 0.
                 Must be a non-negative integer.
         """
         self.size = size
@@ -38,7 +38,7 @@ class Square:
         Set the size of the square.
 
         Args:
-            value (int): The size value to be set.
+            value: The size value to be set.
                 Must be a non-negative integer.
         
         Raises:
