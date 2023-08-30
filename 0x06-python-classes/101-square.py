@@ -106,11 +106,14 @@ class Square:
                    or an empty string if no visual representation.
 
         """
-        if self._size == 0 or self._position[0] < 0 or self._position[1] < 0:
-                return ""
+        if self._size == 0:
+            return ""
 
         square_str = ""
+        for _ in range(self._position[1]):
+            square_str += "\n"
+
         for _ in range(self._size):
-                square_str += " " * self._position[0] + "#" * self._size + "\n"
+            square_str += " " * self._position[0] + "#" * self._size + "\n"
 
         return square_str[:-1]
