@@ -27,7 +27,7 @@ class Square:
             size: The size of the square's sides. Default is 0.
         """
         self.size = size
-        
+
     @property
     def size(self):
         """
@@ -37,7 +37,7 @@ class Square:
             int: The current size of the square's sides.
         """
         return self.__size
-    
+
     @size.setter
     def size(self, value):
         """
@@ -55,7 +55,7 @@ class Square:
         elif value < 0:
             raise ValueError("size must be >= 0")
         self.__size = value
-    
+
     def area(self):
         """
         Calculates the area of the square.
