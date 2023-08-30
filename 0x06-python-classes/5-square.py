@@ -40,7 +40,7 @@ class Square:
         Args:
             value: The size value to be set.
                 Must be a non-negative integer.
- 
+
         Raises:
             TypeError: If value is not an integer.
             ValueError: If value is negative.
