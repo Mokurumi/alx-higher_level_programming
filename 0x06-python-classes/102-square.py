@@ -34,8 +34,8 @@ class Square:
         """Initialize a square with a given size.
 
         Args:
-            size (number, optional): The size of the square's sides.
-			                    Defaults to 0.
+            size: The size of the square's sides.
+                Defaults to 0.
         """
         self.size = size
 

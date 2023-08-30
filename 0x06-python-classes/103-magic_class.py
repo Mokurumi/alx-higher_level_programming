@@ -3,26 +3,28 @@
 import math
 
 
-
 class MagicClass:
     """A class that demonstrates the use of bytecode operations.
 
-    This class provides methods to calculate the area and circumference of a circle.
+    This class provides methods to calculate the area
+    and circumference of a circle.
 
     Attributes:
         __radius (float): The radius of the circle.
 
     Methods:
-        __init__(self, radius): Initialize the MagicClass instance with a radius value.
+        __init__(self, radius=0): Initialize the MagicClass instance
+            with an optional radius value.
         area(self): Calculate the area of the circle.
         circumference(self): Calculate the circumference of the circle.
     """
 
-    def __init__(self, radius):
-        """Initialize a MagicClass instance with a given radius.
+    def __init__(self, radius=0):
+        """Initialize a MagicClass instance with an optional radius.
 
         Args:
-            radius (int or float): The radius of the circle.
+            radius (int or float, optional): The radius of the circle.
+                Defaults to 0.
 
         Raises:
             TypeError: If radius is not a number.
