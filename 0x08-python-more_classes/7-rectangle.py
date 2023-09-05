@@ -111,17 +111,17 @@ class Rectangle:
                 str: The string representation of the rectangle.
         """
         if self.__width == 0 or self.__height == 0:
-                return ""
+            return ""
         if isinstance(self.print_symbol, str):
-                symbol = self.print_symbol
+            symbol = self.print_symbol
         else:
-                symbol = str(self.print_symbol)
+            symbol = str(self.print_symbol)
 
         rectangle_str = ""
         for i in range(self.__height):
-                rectangle_str += symbol * self.__width
-                if i < self.__height - 1:
-                        rectangle_str += '\n'
+            rectangle_str += symbol * self.__width
+            if i < self.__height - 1:
+                rectangle_str += '\n'
         return rectangle_str
 
     def __repr__(self):
