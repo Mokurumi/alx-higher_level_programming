@@ -1,0 +1,92 @@
+#!/usr/bin/python3
+"""Unit tests for say_my_name"""
+
+
+import unittest
+from say_my_name import say_my_name
+import sys
+from io import StringIO
+
+
+class TestSayMyName(unittest.TestCase):
+    """
+    A set of unit tests for the say_my_name function.
+    """
+
+    def test_valid_names(self):
+        """
+        Test case for valid first and last names.
+
+        The say_my_name function should print the correct name message
+           when given valid first and last names.
+        """
+        captured_output = self.capture_output(
+                lambda: say_my_name("John", "Doe")
+                )
+        self.assertEqual(captured_output, "My name is John Doe")
+
+    def test_missing_last_name(self):
+        """
+        Test case for missing last name.
+
+        The say_my_name function should print the name message
+            with only the first name when the last name is missing.
+        """
+        captured_output = self.capture_output(lambda: say_my_name("Alice"))
+        self.assertEqual(captured_output, "My name is Alice")
+
+    def test_invalid_first_name(self):
+        """
+        Test case for an invalid first name.
+
+        The say_my_name function should raise a TypeError
+            when the first name is not a string.
+        """
+        with self.assertRaises(TypeError):
+            say_my_name(42, "Doe")
+
+    def test_invalid_last_name(self):
+        """
+        Test case for an invalid last name.
+
+        The say_my_name function should raise a TypeError
+            when the last name is not a string.
+        """
+        with self.assertRaises(TypeError):
+            say_my_name("John", 42)
+
+    def test_both_names_invalid(self):
+        """
+        Test case for both names being invalid.
+
+        The say_my_name function should raise a TypeError
+            when both the first and last names are not strings.
+        """
+        with self.assertRaises(TypeError):
+            say_my_name(42, 42)
+
+    def test_whitespace_names(self):
+        """
+        Test case for names with leading and trailing whitespace.
+
+        The say_my_name function should trim leading and trailing whitespace
+            from the printed name message.
+        """
+        captured_output = self.capture_output(
+                lambda: say_my_name("   John   ", "   Doe   ")
+                )
+        self.assertEqual(captured_output, "My name is John Doe")
+
+    def capture_output(self, func):
+        """
+        Helper function to capture the output of a function as a string.
+        """
+
+        captured_output = StringIO()
+        sys.stdout = captured_output
+        func()
+        sys.stdout = sys.__stdout__
+        return captured_output.getvalue().strip()
+
+if __name__ == '__main__':
+    unittest.main()

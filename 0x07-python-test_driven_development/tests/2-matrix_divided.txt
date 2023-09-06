@@ -1,0 +1,87 @@
+#!/usr/bin/python3
+"""Unit tests for matrix_divided"""
+
+
+import unittest
+from matrix_divided import matrix_divided
+
+
+class TestMatrixDivided(unittest.TestCase):
+    """
+    A set of unit tests for the matrix_divided function.
+    """
+
+    def test_empty_matrix(self):
+        """
+        Test case for an empty matrix input.
+
+        The matrix_divided function should raise a ValueError
+            when given an empty matrix.
+        """
+        with self.assertRaises(ValueError):
+            matrix_divided([], 2)
+
+    def test_non_matrix_input(self):
+        """
+        Test case for non-matrix input.
+
+        The matrix_divided function should raise a TypeError
+            when given a non-matrix input.
+        """
+        with self.assertRaises(TypeError):
+            matrix_divided([1, 2, 3], 2)
+
+    def test_matrix_with_unequal_rows(self):
+        """
+        Test case for a matrix with unequal row sizes.
+
+        The matrix_divided function should raise a TypeError
+            when given a matrix with unequal row sizes.
+        """
+        with self.assertRaises(TypeError):
+            matrix_divided([[1, 2], [3, 4, 5]], 2)
+
+    def test_non_number_divisor(self):
+        """
+        Test case for a non-number divisor.
+
+        The matrix_divided function should raise a TypeError
+            when the divisor is not a number.
+        """
+        with self.assertRaises(TypeError):
+            matrix_divided([[1, 2], [3, 4]], "2")
+
+    def test_zero_divisor(self):
+        """
+        Test case for a divisor of zero.
+
+        The matrix_divided function should raise a ZeroDivisionError
+            when the divisor is zero.
+        """
+        with self.assertRaises(ZeroDivisionError):
+            matrix_divided([[1, 2], [3, 4]], 0)
+
+    def test_integer_division(self):
+        """
+        Test case for integer division.
+
+        The matrix_divided function should perform integer division
+            and rounding to 2 decimal places.
+        """
+        result = matrix_divided([[1, 2], [3, 4]], 2)
+        expected_result = [[0.5, 1.0], [1.5, 2.0]]
+        self.assertEqual(result, expected_result)
+
+    def test_float_division(self):
+        """
+        Test case for float division.
+
+        The matrix_divided function should perform float division
+           and rounding to 2 decimal places.
+        """
+        result = matrix_divided([[1.5, 2.5], [3.75, 4.25]], 2)
+        expected_result = [[0.75, 1.25], [1.88, 2.12]]
+        self.assertEqual(result, expected_result)
+
+if __name__ == '__main__':
+    unittest.main()

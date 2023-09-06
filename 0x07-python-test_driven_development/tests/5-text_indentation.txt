@@ -1,0 +1,92 @@
+#!/usr/bin/python3
+"""Unit tests for text_indentation"""
+
+
+import unittest
+from text_indentation import text_indentation
+
+
+class TestTextIndentation(unittest.TestCase):
+    """
+    A set of unit tests for the text_indentation function.
+    """
+
+    def test_empty_text(self):
+        """
+        Test case for an empty input text.
+
+        The text_indentation function should not print anythin
+            when given an empty input text.
+        """
+        captured_output = self.capture_output(lambda: text_indentation(""))
+        self.assertEqual(captured_output, "")
+
+    def test_single_sentence(self):
+        """
+        Test case for a single sentence input.
+
+        The text_indentation function should print the single sentence
+            without any additional new lines.
+        """
+        captured_output = self.capture_output(
+                lambda: text_indentation("Hello there!")
+                )
+        self.assertEqual(captured_output, "Hello there!")
+
+    def test_multiple_sentences(self):
+        """
+        Test case for multiple sentences input.
+
+        The text_indentation function should print each sentence
+            on a separate line and add two new lines between sentences.
+        """
+        captured_output = self.capture_output(
+                lambda: text_indentation(
+                    "Hello there. How are you? I'm good: thanks."
+                    )
+                )
+        expected_output = "Hello there\nHow are you\nI'm good\nthanks."
+        self.assertEqual(captured_output, expected_output)
+
+    def test_sentences_with_whitespace(self):
+        """
+        Test case for sentences with leading and trailing whitespace.
+
+        The text_indentation function should trim leading and
+            trailing whitespace from each printed line.
+        """
+        captured_output = self.capture_output(
+                lambda: text_indentation("   This is a sentence.   ")
+                )
+        self.assertEqual(captured_output, "This is a sentence.")
+
+    def test_sentences_with_multiple_whitespace_characters(self):
+        """
+        Test case for sentences with multiple whitespace characters.
+
+        The text_indentation function should handle sentences with
+            multiple whitespace characters properly.
+        """
+        captured_output = self.capture_output(
+                lambda: text_indentation(
+                    "Sentence1.   Sentence2?   Sentence3:   "
+                    )
+                )
+        expected_output = "Sentence1\nSentence2\nSentence3"
+        self.assertEqual(captured_output, expected_output)
+
+    def capture_output(self, func):
+        """
+        Helper function to capture the output of a function as a string.
+        """
+        import sys
+        from io import StringIO
+
+        captured_output = StringIO()
+        sys.stdout = captured_output
+        func()
+        sys.stdout = sys.__stdout__
+        return captured_output.getvalue().strip()
+
+if __name__ == '__main__':
+    unittest.main()
