@@ -39,17 +39,13 @@ def solve_nqueens(n):
     Args:
         n (int): The size of the chessboard and the number of queens to place.
     """
-    if n < 4:
-        print("N must be at least 4")
-        sys.exit(1)
-
     board = [[0 for _ in range(n)] for _ in range(n)]
     solutions = []
 
     def solve(row):
         if row == n:
             # Found a solution, append it to the list
-            solutions.append([[i, j] for i in range(n) for j in range(n) if board[i][j] == 1])
+            solutions.append([list(row) for row in board])
             return
         for col in range(n):
             if is_safe(board, row, col, n):
@@ -63,7 +59,9 @@ def solve_nqueens(n):
 
     for solution in solutions:
         # Print each solution
-        print(solution)
+        for row in solution:
+            print(''.join('Q' if cell == 1 else '.' for cell in row))
+        print()
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -72,6 +70,9 @@ if __name__ == "__main__":
 
     try:
         n = int(sys.argv[1])
+        if n < 4:
+            print("N must be at least 4")
+            sys.exit(1)
         solve_nqueens(n)
     except ValueError:
         print("N must be a number")
