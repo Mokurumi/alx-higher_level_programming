@@ -22,13 +22,6 @@ Valid Matrix Multiplication
 
 Invalid Matrix Multiplication
 =============================
-    >>> m_a = [[1, 2], [3, 4]]
-    >>> m_b = [[5, 6, 7], [8, 9, 10]]
-    >>> matrix_mul(m_a, m_b)
-    Traceback (most recent call last):
-        ...
-    ValueError: m_a and m_b can't be multiplied
-
     >>> m_a = "not_a_matrix"
     >>> m_b = [[5, 6], [7, 8]]
     >>> matrix_mul(m_a, m_b)
