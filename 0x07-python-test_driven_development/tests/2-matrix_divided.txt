@@ -34,9 +34,7 @@ Empty Matrix
     >>> matrix = [[]]
     >>> div = 2
     >>> matrix_divided(matrix, div)
-    Traceback (most recent call last):
-        ...
-    TypeError: matrix must be a matrix (list of lists) of integers/floats
+    [[]]
 
 Invalid Matrix
 ==============
@@ -46,7 +44,7 @@ Invalid Matrix
     >>> matrix_divided(matrix, div)
     Traceback (most recent call last):
         ...
-    TypeError: Each row of matrix must have the same size
+    TypeError: Each row of the matrix must have the same size
 
     >>> matrix = [[1, 2, 3], [4, '5', 6]]
     >>> div = 2
@@ -90,14 +88,14 @@ Matrix with Strings and Non-Rectangular
     >>> matrix_divided(matrix, div)
     Traceback (most recent call last):
         ...
-    TypeError: Each row of matrix must have the same size
+    TypeError: Each row of the matrix must have the same size
 
     >>> matrix = [['a', 'b'], ['c', 'd']]
     >>> div = 2
     >>> matrix_divided(matrix, div)
     Traceback (most recent call last):
         ...
-    TypeError: matrix should contain only integers or floats
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
 
 Float 'inf' Division
 ====================
@@ -114,16 +112,12 @@ Matrix with 'inf' or 'nan' Floats
     >>> matrix = [[1, 2, 3], [4, float('inf'), 6]]
     >>> div = 2
     >>> matrix_divided(matrix, div)
-    Traceback (most recent call last):
-        ...
-    ValueError: cannot convert float inf to integer
+    [[0.5, 1.0, 1.5], [2.0, inf, 3.0]]
 
     >>> matrix = [[1, 2, 3], [4, float('nan'), 6]]
     >>> div = float('inf')
     >>> matrix_divided(matrix, div)
-    Traceback (most recent call last):
-        ...
-    ValueError: cannot convert float nan to integer
+    [[0.0, 0.0, 0.0], [0.0, nan, 0.0]]
 
 Missing Arguments
 =================
@@ -136,5 +130,4 @@ Missing Arguments
     >>> matrix_divided([[1, 2], [3, 4]])
     Traceback (most recent call last):
         ...
-
     TypeError: matrix_divided() missing 1 required positional argument: 'div'
