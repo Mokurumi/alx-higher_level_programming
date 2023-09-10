@@ -1,79 +1,44 @@
-#!/usr/bin/python3
-"""Unit tests for print_square"""
+====================================
+Test for module 4-print_square.py
+====================================
 
+The following are test for function: ``print_square(size)``.
 
-import unittest
-from print_square import print_square
+Import
+======
+>>> print_square = __import__('4-print_square').print_square
 
+Valid Size
+==========
+    >>> print_square(3)
+    ###
+    ###
+    ###
 
-class TestPrintSquare(unittest.TestCase):
-    """
-    A set of unit tests for the print_square function.
-    """
+    >>> print_square(5)
+    #####
+    #####
+    #####
+    #####
+    #####
 
-    def test_positive_size(self):
-        """
-        Test case for a positive size.
+Type Check
+==========
+    >>> print_square("not_an_integer")
+    Traceback (most recent call last):
+        ...
+    TypeError: size must be an integer
 
-        The print_square function should print
-            a square of '#' characters with the specified size.
-        """
-        captured_output = self.capture_output(lambda: print_square(3))
-        expected_output = "###\n###\n###"
-        self.assertEqual(captured_output, expected_output)
+Negative Size
+=============
+    >>> print_square(-1)
+    Traceback (most recent call last):
+        ...
+    ValueError: size must be >= 0
 
-    def test_zero_size(self):
-        """
-        Test case for a size of zero.
-
-        The print_square function should not print anything
-            when the size is zero.
-        """
-        captured_output = self.capture_output(lambda: print_square(0))
-        self.assertEqual(captured_output, "")
-
-    def test_negative_size(self):
-        """
-        Test case for a negative size.
-
-        The print_square function should not print anything and
-            raise a ValueError when the size is negative.
-        """
-        with self.assertRaises(ValueError):
-            print_square(-2)
-
-    def test_float_size(self):
-        """
-        Test case for a floating-point size.
-
-        The print_square function should not print anything and
-            raise a TypeError when the size is a float.
-        """
-        with self.assertRaises(TypeError):
-            print_square(2.5)
-
-    def test_size_as_string(self):
-        """
-        Test case for the size provided as a string.
-
-        The print_square function should not print anything and
-            raise a TypeError when the size is provided as a string.
-        """
-        with self.assertRaises(TypeError):
-            print_square("3")
-
-    def capture_output(self, func):
-        """
-        Helper function to capture the output of a function as a string.
-        """
-        import sys
-        from io import StringIO
-
-        captured_output = StringIO()
-        sys.stdout = captured_output
-        func()
-        sys.stdout = sys.__stdout__
-        return captured_output.getvalue().strip()
-
-if __name__ == '__main__':
-    unittest.main()
+Missing Argument
+================
+    >>> print_square()
+    Traceback (most recent call last):
+        ...
+    TypeError: print_square() missing 1 required positional argument: 'size'

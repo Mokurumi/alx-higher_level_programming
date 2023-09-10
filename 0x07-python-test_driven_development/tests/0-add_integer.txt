@@ -1,75 +1,45 @@
-#!/usr/bin/python3
-"""Unit tests for add_integer"""
+=================================
+Test for module 0-add_integer.py
+=================================
 
+The following are test for function: ``add_integer(a, b=98)``.
 
-import unittest
-from add_integer import add_integer
+Import
+======
+>>> add_integer = __import__('0-add_integer').add_integer
 
+Numbers
+=======
+    >>> add_integer(5, 3.5)
+    8
 
-class TestAddInteger(unittest.TestCase):
+    >>> add_integer(10)
+    108
+
+    >>> add_integer(3.5, 2.5)
+    6
+
+    >>> add_integer(1000, 500)
+    1500
+
+    >>> add_integer(1.2, 2.3)
+    3
+
+Strings and other complex scenarios
+===================================
+
+    >>> add_integer(5.6, float("nan"))
+    Traceback (most recent call last):
+        ...
+    ValueError: cannot convert float NaN to integer
+
+    >>> add_integer(5.6, "string")
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
+
+    >>> add_integer()
+    Traceback (most recent call last):
+        ...
+    TypeError: add_integer() missing 1 required positional argument: 'a'
     """
-    A set of unit tests for the add_integer function.
-    """
-
-    def test_valid_integer_input(self):
-        """
-        Test case for valid integer inputs.
-
-        The add_integer function should correctly add two integers
-            and return the result as an integer.
-        """
-        result = add_integer(5, 7)
-        self.assertEqual(result, 12)
-
-    def test_float_input(self):
-        """
-        Test case for float input.
-
-        The add_integer function should convert float inputs to integers
-            and return the result as an integer.
-        """
-        result = add_integer(3.5, 2.7)
-        self.assertEqual(result, 6)
-
-    def test_negative_integer_input(self):
-        """
-        Test case for negative integer inputs.
-
-        The add_integer function should correctly add two negative integers
-            and return the result as an integer.
-        """
-        result = add_integer(-10, -20)
-        self.assertEqual(result, -30)
-
-    def test_string_input(self):
-        """
-        Test case for string input.
-
-        The add_integer function should raise a TypeError
-            when given string inputs.
-        """
-        with self.assertRaises(TypeError):
-            add_integer("5", "7")
-
-    def test_mixed_type_input(self):
-        """
-        Test case for mixed type inputs.
-
-        The add_integer function should raise a TypeError
-            when given mixed type inputs (e.g., integer and string).
-        """
-        with self.assertRaises(TypeError):
-            add_integer(10, "20")
-
-    def test_large_integer_input(self):
-        """
-        Test case for large integer inputs.
-
-        The add_integer function should correctly add
-            two large integers and return the result as an integer.
-        """
-        result = add_integer(1000000, 2000000)
-        self.assertEqual(result, 3000000)
-
-if __name__ == '__main__':
-    unittest.main()

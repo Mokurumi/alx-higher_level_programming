@@ -1,12 +1,14 @@
 #!/usr/bin/python3
-def add_integer(a, b="98"):
+"""add integer module that takes in floats and integers"""
+
+
+def add_integer(a, b=98):
     """
-    Adds two numbers, allowing for integers, floats,
-        or strings representing numbers as input.
+    Adds two numbers, allowing for integers and floats as input.
 
     Args:
-        a: The first number (integer, float, or string).
-        b: The second number (integer, float, or string). Default is "98".
+        a: The first number (integer or float).
+        b: The second number (integer or float). Default is "98".
 
     Returns:
         int: The addition of the two numbers, cast to an integer.
@@ -19,17 +21,11 @@ def add_integer(a, b="98"):
         result = add_integer(5, 3.5)
         print(result)  # Output: 8
     """
-    # Check if a and b are integers, floats, or strings representing numbers
-    if not isinstance(a, (int, float)) and not (isinstance(a, str) \
-            and a.isdigit()) and not isinstance(b, (int, float)) \
-            and not (isinstance(b, str) and b.isdigit()):
-        raise TypeError("a must be an integer or b must be an integer")
-        
-    # Cast a and b to integers if they are strings
-    if isinstance(a, str):
-        a = int(a)
-    if isinstance(b, str):
-        b = int(b)
+    # Check if a and b are integers or floats
+    if not isinstance(a, (int, float)):
+        raise TypeError("a must be an integer")
+    if not isinstance(b, (int, float)):
+        raise TypeError("b must be an integer")
 
     # Return the addition of a and b as an integer
     return int(a + b)

@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""say_my_name function module that takes in floats and integers"""
+
+
 def say_my_name(first_name, last_name=""):
     """
     Print "My name is <first name> <last name>".

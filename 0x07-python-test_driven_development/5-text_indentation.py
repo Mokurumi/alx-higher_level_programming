@@ -1,14 +1,14 @@
 #!/usr/bin/python3
+'''the function for testing text indentation'''
+
+
 def text_indentation(text):
     """
     Print a text with 2 new lines after each '.', '?', and ':' character.
-
     Args:
     text (str): The input text.
-
     Raises:
     TypeError: If 'text' is not a string.
-
     Example:
     >>> text_indentation("Hello there. How are you? I'm good: thanks.")
     Hello there
@@ -17,19 +17,18 @@ def text_indentation(text):
     thanks.
     """
     # Check if 'text' is a string
-    if not isinstance(text, str):
+    if not text or not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    lines = text.split('.')
-    for line in lines:
-        questions = line.split('?')
-        for question in questions:
-            colons = question.split(':')
-            for colon in colons:
-                print(colon.strip())
-            if len(colons) > 1:
-                print()  # Add an empty line after ':' if present
-        if len(questions) > 1:
-            print()  # Add an empty line after '?' if present
-    if len(lines) > 1:
-        print()  # Add an empty line after '.' if present
+    new_line_chars = ['.', '?', ':']
+
+    current_line = ""
+    for char in text:
+        current_line += char
+        if char in new_line_chars:
+            print(current_line.strip())
+            print()  # Add an empty line
+            current_line = ""
+
+    if current_line:
+        print(current_line.strip(), end='')

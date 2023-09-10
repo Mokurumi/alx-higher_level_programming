@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""module for prin_size function that returns square size in #"""
+
+
 def print_square(size):
     """
     Print a square of '#' characters.
