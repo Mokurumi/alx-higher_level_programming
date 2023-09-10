@@ -11,7 +11,14 @@ Import
 Valid Text
 ==========
     >>> text_indentation("Hello there. How are you? I'm good: thanks.")
-    Hello there.\n\nHow are you?\n\nI'm good:\n\nthanks.
+    Hello there.
+    <BLANKLINE>
+    How are you?
+    <BLANKLINE>
+    I'm good:
+    <BLANKLINE>
+    thanks.
+    <BLANKLINE>
 
 Text with Blank Line
 ====================
