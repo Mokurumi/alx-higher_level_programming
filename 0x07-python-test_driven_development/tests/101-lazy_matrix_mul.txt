@@ -1,0 +1,130 @@
+==========================================
+Test for matrix multiplication using numpy
+==========================================
+
+Import
+======
+>>> import numpy as np
+>>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+
+Valid matrix multiplication
+===========================
+>>> m1 = np.array([[1, 2], [3, 4]])
+>>> m2 = np.array([[5, 6], [7, 8]])
+>>> result = lazy_matrix_mul(m1, m2)
+>>> result
+array([[19, 22],
+       [43, 50]])
+
+>>> m3 = np.array([[2, 0], [0, 2]])
+>>> m4 = np.array([[3, 4], [5, 6]])
+>>> result = lazy_matrix_mul(m3, m4)
+>>> result
+array([[ 6,  8],
+       [10, 12]])
+
+Invalid matrix multiplication
+=============================
+>>> m9 = np.array([[1, 2, 3], [4, 5, 6]])
+>>> m10 = np.array([[1, 2], [3, 4]])
+>>> lazy_matrix_mul(m9, m10)
+Traceback (most recent call last):
+    ...
+ValueError: shapes (2,3) and (2,2) not aligned: 3 (dim 1) != 2 (dim 0)
+
+Invalid input types
+===================
+>>> m11 = "not a list"
+>>> m12 = np.array([[1, 2], [3, 4]])
+>>> lazy_matrix_mul(m11, m12)
+Traceback (most recent call last):
+    ...
+ValueError: Scalar operands are not allowed, use '*' instead
+
+>>> m13 = np.array([[1, 2], [3, 4]])
+>>> m14 = "not a list"
+>>> lazy_matrix_mul(m13, m14)
+Traceback (most recent call last):
+    ...
+ValueError: Scalar operands are not allowed, use '*' instead
+
+Empty matrices
+==============
+>>> m15 = []
+>>> m16 = np.array([[1, 2], [3, 4]])
+>>> lazy_matrix_mul(m15, m16)
+Traceback (most recent call last):
+    ...
+ValueError: shapes (0,) and (2,2) not aligned: 0 (dim 0) != 2 (dim 0)
+
+>>> m17 = np.array([[1, 2], [3, 4]])
+>>> m18 = []
+>>> lazy_matrix_mul(m17, m18)
+Traceback (most recent call last):
+    ...
+ValueError: shapes (2,2) and (0,) not aligned: 2 (dim 1) != 0 (dim 0)
+
+Invalid data types in matrices
+==============================
+>>> m19 = np.array([["a", 2], [3, 4]])
+>>> m20 = np.array([[1, 2], [3, 4]])
+>>> lazy_matrix_mul(m19, m20)
+Traceback (most recent call last):
+    ...
+TypeError: invalid data type for einsum
+
+>>> m21 = np.array([[1, 2], [3, 4]])
+>>> m22 = np.array([["b", 2], [3, 4]])
+>>> lazy_matrix_mul(m21, m22)
+Traceback (most recent call last):
+    ...
+TypeError: invalid data type for einsum
+
+Matrices with varying row sizes
+==============================
+>>> m23 = np.array([[1, 2], [3, 4, 5]])
+>>> m24 = np.array([[1, 2], [3, 4]])
+>>> lazy_matrix_mul(m23, m24)
+Traceback (most recent call last):
+    ...
+TypeError: Object arrays are not currently supported
+
+>>> m25 = np.array([[1, 2], [3, 4]])
+>>> m26 = np.array([[1, 2], [3, 4, 5]])
+>>> lazy_matrix_mul(m25, m26)
+Traceback (most recent call last):
+    ...
+TypeError: Object arrays are not currently supported
+
+Incompatible matrices
+=====================
+>>> m27 = np.array([[1, 2], [3, 4]])
+>>> m28 = np.array([[1, 2], [3, 4]])
+>>> lazy_matrix_mul(m27, m28)
+array([[ 7, 10],
+       [15, 22]])
+
+Missing arguments
+=================
+>>> lazy_matrix_mul()
+Traceback (most recent call last):
+    ...
+TypeError: lazy_matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
+
+>>> m29 = np.array([[1, 2], [3, 4]])
+>>> lazy_matrix_mul(m29)
+Traceback (most recent call last):
+    ...
+TypeError: lazy_matrix_mul() missing 1 required positional argument: 'm_b'
+
+>>> m30 = np.array([[1, 2], [3, 4]])
+>>> lazy_matrix_mul(None, m30)
+Traceback (most recent call last):
+    ...
+TypeError: Object arrays are not currently supported
+
+>>> m31 = np.array([[1, 2], [3, 4]])
+>>> lazy_matrix_mul(m31, None)
+Traceback (most recent call last):
+    ...
+TypeError: Object arrays are not currently supported
