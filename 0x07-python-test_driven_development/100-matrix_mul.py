@@ -35,6 +35,7 @@ def validate_matrix(matrix, matrix_name):
                         f"{matrix_name} should contain only integers or floats"
                         )
 
+
 def matrix_mul(m_a, m_b):
     """
     Multiply two matrices and return the result.
