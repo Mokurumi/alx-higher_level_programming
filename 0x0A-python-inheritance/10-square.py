@@ -71,6 +71,7 @@ class Rectangle(BaseGeometry):
 
 
 class Square(Rectangle):
+    '''square class that inherits from rectangle'''
     def __init__(self, size):
         """
         Initializes a Square object with the specified size.
