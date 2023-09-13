@@ -3,6 +3,7 @@
 module to convert class to JSON
 """
 
+
 def class_to_json(obj):
     """
     Converts an object to a dictionary with serializable data structures
