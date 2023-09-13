@@ -3,7 +3,7 @@
 
 
 class BaseGeometry:
-    '''Empty class'''
+    '''Base class'''
     def area(self):
         """
         Raises an Exception with the message "area() is not implemented".
