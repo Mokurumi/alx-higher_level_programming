@@ -1,5 +1,12 @@
-MyList Class Tests
-------------------
+=================================
+Test for module 0-MyList.py
+=================================
+
+The following are test for function: ``MyList(list)``.
+
+Import
+======
+>>> MyList = __import__('1-my_list').MyList
 
 Check instantiation
 ===================
@@ -39,7 +46,7 @@ To check the print_sorted method with a sorted list:
 
 >>> my_list = MyList([3, 2, 1])
 >>> my_list.print_sorted()
-1 2 3
+[1, 2, 3]
 
 Check print_sorted() with not sorted append
 ===========================================
@@ -50,7 +57,7 @@ To check the print_sorted method with an unsorted list:
 >>> my_list.append(1)
 >>> my_list.append(2)
 >>> my_list.print_sorted()
-1 2 3
+[1, 2, 3]
 
 Check print_sorted() with no sorted append with negative number
 ==============================================================
@@ -61,7 +68,7 @@ To check the print_sorted method with negative numbers:
 >>> my_list.append(-1)
 >>> my_list.append(-2)
 >>> my_list.print_sorted()
--3 -2 -1
+[-3, -2, -1]
 
 Check print_sorted() with empty list
 =====================================
@@ -69,6 +76,7 @@ To check the print_sorted method with an empty list:
 
 >>> my_list = MyList()
 >>> my_list.print_sorted()
+[]
 
 Check print_sorted() returns a new list
 =======================================
@@ -76,5 +84,4 @@ To check if print_sorted returns a new sorted list:
 
 >>> my_list = MyList([3, 1, 2, 4, 5])
 >>> sorted_list = my_list.print_sorted()
->>> sorted_list
 [1, 2, 3, 4, 5]
