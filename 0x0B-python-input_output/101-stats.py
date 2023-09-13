@@ -7,51 +7,51 @@ module to read in line by line and compute metrics
 import sys
 
 
-def print_metrics(size, stat_codes):
-    """
-    Prints the total file size and counts of each HTTP status code.
-
+def print_stats(size, status_codes):
+    """Print accumulated metrics.
     Args:
-        size (int): Total file size.
-        stat_codes (dict):
-            Dictionary containing counts of each HTTP status code.
+        size (int): The accumulated read file size.
+        status_codes (dict): The accumulated count of status codes.
     """
-    print("File size: {:d}".format(size))
-    for k, v in sorted(stat_codes.items()):
-        if v:
-            print("{:s}: {:d}".format(k, v))
+    print("File size: {}".format(size))
+    for key in sorted(status_codes):
+        print("{}: {}".format(key, status_codes[key]))
 
 
-def compute_metrics():
-    """
-    Parses input lines from the standard input and computes metrics.
+if __name__ == "__main__":
+    import sys
 
-    This function reads lines from the standard input, extracts the file size
-        and HTTP status code from each line, and computes the total file size
-        and counts of each HTTP status code.
-        It prints the metrics every 10 lines.
-
-    Returns:
-        None
-    """
     size = 0
-    lines = 0
-    stat_codes = {"200": 0, "301": 0, "400": 0, "401": 0,
-                  "403": 0, "404": 0, "405": 0, "500": 0}
+    status_codes = {}
+    valid_codes = ['200', '301', '400', '401', '403', '404', '405', '500']
+    count = 0
+
     try:
         for line in sys.stdin:
-            fields = list(map(str, line.strip().split(" ")))
-            size += int(fields[-1])
-            if fields[-2] in stat_codes:
-                stat_codes[fields[-2]] += 1
-            lines += 1
-            if lines % 10 == 0:
-                print_metrics(size, stat_codes)
+            if count == 10:
+                print_stats(size, status_codes)
+                count = 1
+            else:
+                count += 1
+
+            line = line.split()
+
+            try:
+                size += int(line[-1])
+            except (IndexError, ValueError):
+                pass
+
+            try:
+                if line[-2] in valid_codes:
+                    if status_codes.get(line[-2], -1) == -1:
+                        status_codes[line[-2]] = 1
+                    else:
+                        status_codes[line[-2]] += 1
+            except IndexError:
+                pass
+
+        print_stats(size, status_codes)
+
     except KeyboardInterrupt:
-        print_metrics(size, stat_codes)
+        print_stats(size, status_codes)
         raise
-
-    print_metrics(size, stat_codes)
-
-# Execute the parsing and computing function
-compute_metrics()
