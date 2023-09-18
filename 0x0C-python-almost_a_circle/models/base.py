@@ -71,25 +71,12 @@ class Base:
         Returns:
             None
         """
-        # Get the class name to use in the filename (e.g., Rectangle.json).
-        class_name = cls.__name__
-        # Create the filename by appending '.json' to the class name.
-        filename = f"{class_name}.json"
-
-        # Initialize an empty list if list_objs is None.
         if list_objs is None:
             list_objs = []
 
-        # Convert the list of instances to a list of dictionaries
-        # using to_dictionary method.
-        list_dicts = [obj.to_dictionary() for obj in list_objs]
-
-        # Use the json module to convert the list of dict to a JSON string.
-        json_string = json.dumps(list_dicts)
-
-        # Write JSON string to the file, overwriting it if it already exists.
-        with open(filename, "w") as file:
-            file.write(json_string)
+        filename = "{}.json".format(cls.__name__)
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(cls.to_json_string([o.to_dictionary() for o in list_objs]))
 
     @staticmethod
     def from_json_string(json_string):
