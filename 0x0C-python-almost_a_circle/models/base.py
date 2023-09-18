@@ -107,3 +107,29 @@ class Base:
 
         # Use the json module to parse the JSON string into a list of dict
         return json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """
+        Create an instance with attributes set based on the provided dict
+
+        Args:
+            **dictionary: Keyword arguments representing
+                attribute names and values.
+
+        Returns:
+            Base: An instance of the class with
+                attributes set according to the dictionary.
+        """
+        # Create a "dummy" instance with mandatory attributes.
+        if cls.__name__ == "Rectangle":
+            dummy_instance = cls(1, 1)
+        elif cls.__name__ == "Square":
+            dummy_instance = cls(1)
+        else:
+            raise ValueError("Unsupported class")
+
+        # Use the update method to set the attributes based on the dictionary.
+        dummy_instance.update(**dictionary)
+
+        return dummy_instance
