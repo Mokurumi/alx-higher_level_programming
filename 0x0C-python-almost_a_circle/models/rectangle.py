@@ -152,3 +152,19 @@ class Rectangle(Base):
         elif kwargs:
             for key, value in kwargs.items():
                 setattr(self, key, value)
+
+    # Public method to return a dictionary representation of the rectangle.
+    def to_dictionary(self):
+        """
+        Return a dictionary representation of the rectangle.
+
+        Returns:
+            dict: A dictionary containing id, width, height, x, and y.
+        """
+        return {
+            "id": self.id,
+            "width": self.width,
+            "height": self.height,
+            "x": self.x,
+            "y": self.y
+        }
