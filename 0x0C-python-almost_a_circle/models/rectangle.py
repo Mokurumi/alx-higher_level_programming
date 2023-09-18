@@ -126,4 +126,4 @@ class Rectangle(Base):
               (<id>) <x>/<y> - <width>/<height>.
         """
         return f"[Rectangle] ({self.id}) {self.x}/{self.y} - "\
-                f"{self.width}/{self.height}"
+               f"{self.width}/{self.height}"
