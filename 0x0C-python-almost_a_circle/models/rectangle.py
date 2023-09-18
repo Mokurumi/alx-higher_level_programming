@@ -115,3 +115,15 @@ class Rectangle(Base):
         """
         for _ in range(self.height):
             print('#' * self.width)
+
+    # Override the __str__ method to customize the string representation.
+    def __str__(self):
+        """
+        Return a string representation of the rectangle.
+
+        Returns:
+            str: A string in the format [Rectangle]
+              (<id>) <x>/<y> - <width>/<height>.
+        """
+        return f"[Rectangle] ({self.id}) {self.x}/{self.y} - "\
+                f"{self.width}/{self.height}"
