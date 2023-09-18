@@ -131,25 +131,24 @@ class Rectangle(Base):
         return f"[Rectangle] ({self.id}) {self.x}/{self.y} - "\
                f"{self.width}/{self.height}"
 
-    # Public method to update the attributes based on provided arguments.
-    def update(self, *args):
+    # Public method to update the attributes based on provided args or kwargs.
+    def update(self, *args, **kwargs):
         """
-        Update the attributes of the rectangle based on provided arguments.
+        Update the attributes of the rectangle
+            based on provided arguments or kwargs.
 
         Args:
             *args: Variable number of arguments in the order:
                 id, width, height, x, y.
+            **kwargs: Keyword arguments representing attribute names and values
 
         Returns:
             None
         """
-        if len(args) >= 1:
-            self.id = args[0]
-        if len(args) >= 2:
-            self.width = args[1]
-        if len(args) >= 3:
-            self.height = args[2]
-        if len(args) >= 4:
-            self.x = args[3]
-        if len(args) >= 5:
-            self.y = args[4]
+        if args:
+            attrs = ["id", "width", "height", "x", "y"]
+            for i, value in enumerate(args):
+                setattr(self, attrs[i], value)
+        elif kwargs:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
