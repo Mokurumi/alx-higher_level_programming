@@ -105,16 +105,19 @@ class Rectangle(Base):
         """
         return self.width * self.height
 
-    # Public method to display the rectangle using '#' characters.
+    # Public method to display the rectangle with correct positioning.
     def display(self):
         """
-        Display the rectangle by printing it to stdout with '#' characters.
+        Display the rectangle by printing it to stdout with '#' characters,
+        considering the position (x, y).
 
         Returns:
             None
         """
+        for _ in range(self.y):
+            print()
         for _ in range(self.height):
-            print('#' * self.width)
+            print(' ' * self.x + '#' * self.width)
 
     # Override the __str__ method to customize the string representation.
     def __str__(self):
@@ -127,3 +130,26 @@ class Rectangle(Base):
         """
         return f"[Rectangle] ({self.id}) {self.x}/{self.y} - "\
                f"{self.width}/{self.height}"
+
+    # Public method to update the attributes based on provided arguments.
+    def update(self, *args):
+        """
+        Update the attributes of the rectangle based on provided arguments.
+
+        Args:
+            *args: Variable number of arguments in the order:
+                id, width, height, x, y.
+
+        Returns:
+            None
+        """
+        if len(args) >= 1:
+            self.id = args[0]
+        if len(args) >= 2:
+            self.width = args[1]
+        if len(args) >= 3:
+            self.height = args[2]
+        if len(args) >= 4:
+            self.x = args[3]
+        if len(args) >= 5:
+            self.y = args[4]
