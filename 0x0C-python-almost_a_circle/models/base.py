@@ -4,6 +4,8 @@ The Base class serves as the foundation for other classes in the project.
 It manages the 'id' attribute for objects and ensures unique IDs are assigned.
 """
 
+import json
+
 
 class Base:
     """
@@ -40,3 +42,68 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        """
+        Return the JSON string representation of a list of dictionaries.
+
+        Args:
+            list_dictionaries (list): A list of dictionaries.
+
+        Returns:
+            str: JSON string representation of list_dictionaries.
+        """
+        if not list_dictionaries:
+            return "[]"
+
+        # Use json module to convert the list of dictionaries to a JSON string
+        return json.dumps(list_dictionaries)
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """
+        Write the JSON string representation of list_objs to a file.
+
+        Args:
+            list_objs (list): A list of instances that inherit from Base.
+
+        Returns:
+            None
+        """
+        # Get the class name to use in the filename (e.g., Rectangle.json).
+        class_name = cls.__name__
+        # Create the filename by appending '.json' to the class name.
+        filename = f"{class_name}.json"
+
+        # Initialize an empty list if list_objs is None.
+        if list_objs is None:
+            list_objs = []
+
+        # Convert the list of instances to a list of dictionaries
+        # using to_dictionary method.
+        list_dicts = [obj.to_dictionary() for obj in list_objs]
+
+        # Use the json module to convert the list of dict to a JSON string.
+        json_string = json.dumps(list_dicts)
+
+        # Write JSON string to the file, overwriting it if it already exists.
+        with open(filename, "w") as file:
+            file.write(json_string)
+
+    @staticmethod
+    def from_json_string(json_string):
+        """
+        Return a list from the JSON string representation.
+
+        Args:
+            json_string (str): A string representing a list of dictionaries.
+
+        Returns:
+            list: The list represented by json_string.
+        """
+        if not json_string:
+            return []
+
+        # Use the json module to parse the JSON string into a list of dict
+        return json.loads(json_string)
