@@ -5,6 +5,8 @@ It manages the 'id' attribute for objects and ensures unique IDs are assigned.
 """
 
 import json
+import turtle
+import csv
 
 
 class Base:
@@ -146,3 +148,106 @@ class Base:
         instance_list = [cls.create(**data) for data in data_list]
 
         return instance_list
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """
+        Serialize a list of objects to a CSV file.
+
+        Args:
+            cls (type): The class type.
+            list_objs (list): A list of instances that inherit from Base.
+
+        Returns:
+            None
+        """
+        if list_objs is None:
+            list_objs = []
+
+        filename = f"{cls.__name__}.csv"
+
+        with open(filename, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            if cls.__name__ == "Rectangle":
+                for obj in list_objs:
+                    writer.writerow(
+                            [obj.id, obj.width, obj.height, obj.x, obj.y]
+                    )
+            elif cls.__name__ == "Square":
+                for obj in list_objs:
+                    writer.writerow([obj.id, obj.size, obj.x, obj.y])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """
+        Deserialize objects from a CSV file and return a list of instances.
+
+        Args:
+            cls (type): The class type.
+
+        Returns:
+            list: A list of instances loaded from the CSV file.
+        """
+        filename = f"{cls.__name__}.csv"
+
+        try:
+            with open(filename, mode='r', newline='') as file:
+                reader = csv.reader(file)
+                instances = []
+                if cls.__name__ == "Rectangle":
+                    for row in reader:
+                        id, width, height, x, y = map(int, row)
+                        instances.append(cls(id, width, height, x, y))
+                elif cls.__name__ == "Square":
+                    for row in reader:
+                        id, size, x, y = map(int, row)
+                        instances.append(cls(id, size, x, y))
+                return instances
+        except FileNotFoundError:
+            return []
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """
+        Draw Rectangles and Squares using the Turtle graphics module.
+
+        Args:
+            list_rectangles (list): A list of Rectangle instances.
+            list_squares (list): A list of Square instances.
+
+        Returns:
+            None
+        """
+        # Create a Turtle screen
+        screen = turtle.Screen()
+        screen.title("Drawing Rectangles and Squares")
+
+        # Create a Turtle object for drawing
+        drawer = turtle.Turtle()
+
+        # Set up the drawing speed and other properties
+        drawer.speed(0)  # Fastest drawing speed
+        drawer.penup()    # Lift the pen to move without drawing lines
+
+        # Draw Rectangles
+        for rect in list_rectangles:
+            drawer.goto(rect.x, rect.y)
+            drawer.pendown()
+            for _ in range(2):
+                drawer.forward(rect.width)
+                drawer.left(90)
+                drawer.forward(rect.height)
+                drawer.left(90)
+            drawer.penup()
+
+        # Draw Squares
+        for square in list_squares:
+            drawer.goto(square.x, square.y)
+            drawer.pendown()
+            for _ in range(4):
+                drawer.forward(square.size)
+                drawer.left(90)
+            drawer.penup()
+
+        # Close the drawing window when clicked
+        screen.exitonclick()
