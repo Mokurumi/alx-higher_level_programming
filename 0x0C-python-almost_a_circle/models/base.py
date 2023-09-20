@@ -149,61 +149,69 @@ class Base:
 
         return instance_list
 
+
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """
-        Serialize a list of objects to a CSV file.
+        Serialize and save instances to a CSV file.
 
         Args:
-            cls (type): The class type.
-            list_objs (list): A list of instances that inherit from Base.
+            list_objs (list): A list of instances to serialize and save.
 
         Returns:
             None
         """
-        if list_objs is None:
-            list_objs = []
-
+        # Determine the filename based on the class name.
         filename = f"{cls.__name__}.csv"
 
-        with open(filename, mode='w', newline='') as file:
-            writer = csv.writer(file)
-            if cls.__name__ == "Rectangle":
-                for obj in list_objs:
+        # Create or overwrite the CSV file.
+        with open(filename, "w", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+
+            for obj in list_objs:
+                if cls.__name__ == "Rectangle":
+                    # For Rectangle, write id, width, height, x, to CSV file.
                     writer.writerow(
                             [obj.id, obj.width, obj.height, obj.x, obj.y]
-                    )
-            elif cls.__name__ == "Square":
-                for obj in list_objs:
+                            )
+                elif cls.__name__ == "Square":
+                    # For Square, write id, size, x, y to the CSV file.
                     writer.writerow([obj.id, obj.size, obj.x, obj.y])
 
     @classmethod
     def load_from_file_csv(cls):
         """
-        Deserialize objects from a CSV file and return a list of instances.
-
-        Args:
-            cls (type): The class type.
+        Deserialize and load instances from a CSV file.
 
         Returns:
             list: A list of instances loaded from the CSV file.
         """
+        # Determine the filename based on the class name.
         filename = f"{cls.__name__}.csv"
 
         try:
-            with open(filename, mode='r', newline='') as file:
-                reader = csv.reader(file)
-                instances = []
-                if cls.__name__ == "Rectangle":
-                    for row in reader:
+            with open(filename, "r", newline="") as csvfile:
+                reader = csv.reader(csvfile)
+                instance_list = []
+
+                for row in reader:
+                    if cls.__name__ == "Rectangle" and len(row) == 5:
+                        # Create instances from CSV (id, width, height, x, y)
                         id, width, height, x, y = map(int, row)
-                        instances.append(cls(id, width, height, x, y))
-                elif cls.__name__ == "Square":
-                    for row in reader:
+                        instance = cls(width, height, x, y, id)
+                    elif cls.__name__ == "Square" and len(row) == 4:
+                        # For Square, create instances from CSV data
+                        # (id, size, x, y).
                         id, size, x, y = map(int, row)
-                        instances.append(cls(id, size, x, y))
-                return instances
+                        instance = cls(size, x, y, id)
+                    else:
+                        raise ValueError("Invalid CSV format")
+
+                    instance_list.append(instance)
+
+            return instance_list
         except FileNotFoundError:
+            # If the file doesn't exist, return an empty list.
             return []
 
     @staticmethod
