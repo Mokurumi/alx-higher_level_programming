@@ -1,13 +1,13 @@
 #!/usr/bin/node
 
 const factorial = (n) => {
-	// Base case: factorial of 0 or NaN is 1
-	if (isNaN(n) || n === 0) {
-		return 1;
-	}
-	
-	// Recursive case: n! = n * (n-1)!
-	return n * factorial(n - 1);
+  // Base case: factorial of 0 or NaN is 1
+  if (isNaN(n) || n === 0) {
+    return 1;
+  }
+
+  // Recursive case: n! = n * (n-1)!
+  return n * factorial(n - 1);
 };
 
 // Convert the first argument to an integer

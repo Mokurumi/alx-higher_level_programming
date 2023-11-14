@@ -8,11 +8,11 @@ const numArgs = nums.length;
 
 // Check if no arguments or only one argument is passed
 if (numArgs === 0 || numArgs === 1) {
-	console.log(0);
+  console.log(0);
 } else {
-	// Sort the array in descending order
-	nums.sort((a, b) => b - a);
+  // Sort the array in descending order
+  nums.sort((a, b) => b - a);
 
-	// Find and print the second biggest integer
-	console.log(nums[1]);
+  // Find and print the second biggest integer
+  console.log(nums[1]);
 }
