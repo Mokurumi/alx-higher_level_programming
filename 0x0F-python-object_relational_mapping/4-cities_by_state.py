@@ -16,4 +16,4 @@ if __name__ == "__main__":
             JOIN states ON cities.state_id = states.id
             ORDER BY cities.id ASC
             """)
-    [print(city) for city in cursor.fetchall()]i
+    [print(city) for city in cursor.fetchall()]

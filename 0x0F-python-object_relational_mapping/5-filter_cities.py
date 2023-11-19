@@ -17,4 +17,5 @@ if __name__ == "__main__":
             ORDER BY cities.id
             """)
     print(", ".join([city[2]
-        for city in cursor.fetchall() if city[4] == sys.argv[4]]))
+        for city in cursor.fetchall()
+        if city[4] == sys.argv[4]]))
