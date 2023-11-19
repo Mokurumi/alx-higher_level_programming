@@ -9,11 +9,7 @@ import MySQLdb
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 5:
-        print("
-        Usage: python script.py <username> <password> <database> <state_name>
-        ")
-    else:
+    if len(sys.argv) == 5:
         db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2],
                 db=sys.argv[3])
         cursor = db.cursor()
