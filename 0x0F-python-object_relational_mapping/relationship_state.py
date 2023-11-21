@@ -2,31 +2,16 @@
 """
 Defines a state model
 """
-from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
-
-
-Base = declarative_base()
+from relationship_city import Base, City
 
 
 class State(Base):
     """Represents a State linked to the MySQL table 'states'."""
-
-    __tablename__ = 'states'
-
-    id = Column(
-            Integer,
-            primary_key=True,
-            nullable=False,
-            autoincrement=True
-            )
-    """int: Represents the unique identifier for the state."""
-
+    __tablename__ = "states"
+    id = Column(Integer, primary_key=True)
     name = Column(String(128), nullable=False)
 
-    cities = relationship("City", cascade="all, delete", backref="state")
-    """
-    relationship: Represents the relationship with City objects.
-    If State object is deleted, all linked City objects are automatically deleted.
-    Reference from a City object to its State is named 'state'.
-    """
+    cities = relationship("City", backref="state", cascade="all, delete")

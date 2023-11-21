@@ -2,8 +2,6 @@
 """
 Creates the State “California” with the City “San Francisco”
 """
-
-
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
