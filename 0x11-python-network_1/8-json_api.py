@@ -23,11 +23,11 @@ if __name__ == "__main__":
 
     try:
         # Try to parse the response as JSON
-        json_response = response.json()
+        json_resp = response.json()
 
         # Check if the response JSON is properly formatted and not empty
-        if json_response and isinstance(json_response, dict):
-            print("[{}] {}".format(json_response['id'], json_response['name']))
+        if json_resp and isinstance(json_resp, dict):
+            print("[{}] {}".format(json_resp['id'], json_resp['name']))
         else:
             print("No result")
 
