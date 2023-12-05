@@ -3,6 +3,7 @@
 Find a peak in a list of unsorted integers using a divide-and-conquer strategy
 '''
 
+
 def find_peak(list_of_integers):
     """
     Args:
