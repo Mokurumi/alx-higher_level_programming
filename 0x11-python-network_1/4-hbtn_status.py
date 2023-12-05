@@ -11,7 +11,6 @@ if __name__ == "__main__":
     response = requests.get(URL)
 
     # Display the body of the response in the specified format
-    print("-" * 50)
     print("Body response:")
     print(f"\t- type: {type(response.text)}")
     print(f"\t- content: {response.text}")
